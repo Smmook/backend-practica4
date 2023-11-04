@@ -1,5 +1,6 @@
-import mongoose from "npm:mongoose";
+import mongoose from "mongoose";
 import { Planeta } from "../types.ts";
+import setDocumentId from "../utils/setDocumentId.ts";
 
 const PlanetaSchema = new mongoose.Schema<Planeta>({
   nombre: { type: String, required: true },
@@ -9,11 +10,7 @@ const PlanetaSchema = new mongoose.Schema<Planeta>({
 });
 
 PlanetaSchema.set("toJSON", {
-  "transform": (document, planeta) => {
-    planeta.id = planeta._id;
-    delete planeta._id;
-    delete planeta.__v;
-  },
+  transform: setDocumentId,
 });
 
 const PlanetaModel = mongoose.model<Planeta>("Planeta", PlanetaSchema);

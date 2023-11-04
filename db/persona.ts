@@ -1,17 +1,16 @@
 import mongoose from "npm:mongoose";
 import { Persona } from "../types.ts";
+import setDocumentId from "../utils/setDocumentId.ts";
 
-const personaSchema = new mongoose.Schema<Persona>({
+const PersonaSchema = new mongoose.Schema<Persona>({
   nombre: { type: String, required: true },
-  edad: { type: Number, required: true },
+  edad: { type: Number, reqiored: true },
 });
 
-personaSchema.set("toJSON", {
-  transform: (documento, persona) => {
-    persona.id = persona._id;
-    delete persona._id;
-    delete persona.__v;
-  },
+PersonaSchema.set("toJSON", {
+  transform: setDocumentId,
 });
 
-export default mongoose.model<Persona>("Persona", personaSchema);
+const PersonaModel = mongoose.model<Persona>("Persona", PersonaSchema);
+
+export default PersonaModel;
