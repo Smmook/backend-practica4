@@ -4,6 +4,7 @@
   },
   "imports": {
     "express": "npm:express",
-    "mongoose": "npm:mongoose"
+    "mongoose": "npm:mongoose",
+    "dotenv": "https://deno.land/std@0.204.0/dotenv/mod.ts"
   }
 }

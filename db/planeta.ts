@@ -4,14 +4,11 @@ import setDocumentId from "../utils/setDocumentId.ts";
 
 const PlanetaSchema = new mongoose.Schema<Planeta>({
   nombre: { type: String, required: true },
-  personas: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "Persona" },
-  ],
+  personas: [{ type: mongoose.Schema.Types.ObjectId, ref: "Persona" }],
 });
 
-PlanetaSchema.set("toJSON", {
-  transform: setDocumentId,
-});
+PlanetaSchema.set("toJSON", { transform: setDocumentId });
+PlanetaSchema.set("toObject", { transform: setDocumentId });
 
 const PlanetaModel = mongoose.model<Planeta>("Planeta", PlanetaSchema);
 
