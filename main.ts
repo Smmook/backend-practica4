@@ -13,6 +13,9 @@ import addPersona from "./resolvers/addPersona.ts";
 import addPlaneta from "./resolvers/addPlaneta.ts";
 import addDimension from "./resolvers/addDimension.ts";
 import deletePersona from "./resolvers/deletePersona.ts";
+import deleteDimension from "./resolvers/deleteDimension.ts";
+import editPersona from "./resolvers/editPersona.ts";
+import editPlaneta from "./resolvers/editPlaneta.ts";
 
 const env = await load();
 
@@ -33,12 +36,15 @@ app
   .post("/api/personas", addPersona)
   .get("/api/personas/:id", getPersona)
   .delete("/api/personas/:id", deletePersona)
+  .put("/api/personas/:id", editPersona)
   .post("/api/planetas", addPlaneta)
   .get("/api/planetas", getAllPlanetas)
   .get("/api/planetas/:id", getPlaneta)
+  .put("/api/planetas/:id", editPlaneta)
   .get("/api/dimensiones", getAllDimensiones)
   .post("/api/dimensiones", addDimension)
-  .get("/api/dimensiones/:id", getDimension);
+  .get("/api/dimensiones/:id", getDimension)
+  .delete("/api/dimensiones/:id", deleteDimension);
 
 app.listen(8080, () => {
   console.log("Server running");
