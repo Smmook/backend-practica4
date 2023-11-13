@@ -1,19 +1,24 @@
 // @deno-types="npm:@types/express"
-import express, { NextFunction, Request, Response } from "npm:express@4.18.2";
-import PlanetaModel from "../db/planeta.ts";
+import { Request, Response } from "npm:express@4.18.2";
 import PersonaModel from "../db/persona.ts";
+import PlanetaModel from "../db/planeta.ts";
 
 const addPlaneta = async (req: Request, res: Response) => {
   const { nombre, personas } = req.body;
+  if (!nombre || !personas) {
+    return res.status(400).send();
+  }
   try {
-    const pers = await PersonaModel.find({ _id: { $in: personas } });
-    if (pers.length !== personas.length) {
-      res.status(400).send("Error. Alguna persona no es valida");
+    const validPeople = await PersonaModel.find({ _id: { $in: personas } })
+      .select("_id");
+    if (validPeople.length !== personas.length) {
+      return res.status(400).send("Alguna persona no es valida.");
     }
     const saved = await new PlanetaModel({ nombre, personas }).save();
+
     res.status(201).send(saved);
   } catch (error) {
-    res.status(400).send({ [error.name]: error.message });
+    res.status(500).send(error.message);
   }
 };
 
