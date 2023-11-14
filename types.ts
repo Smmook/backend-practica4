@@ -15,3 +15,10 @@ export type Dimension = {
   planetas: Planeta[];
   id: string;
 };
+
+export type Tardis = {
+  dimensiones: Dimension[];
+  camuflaje: number;
+  timeLord: number;
+  anio: number;
+};
