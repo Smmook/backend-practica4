@@ -1,5 +1,5 @@
 // @deno-types="npm:@types/express"
-import { Request, Response } from "npm:express@4.18.2";
+import { Request, Response } from "express";
 import PlanetaModel from "../db/planeta.ts";
 import DimensionModel from "../db/dimension.ts";
 
