@@ -14,13 +14,16 @@ export default async (req: Request, res: Response) => {
     if (!(await comprobarPlanetas(planetas))) {
       return res.status(400).send("Algun planeta no es valido.");
     }
-    const updated = DimensionModel.findByIdAndUpdate(id, { nombre, planetas }, {
+    const updated = await DimensionModel.findByIdAndUpdate(id, {
+      nombre,
+      planetas,
+    }, {
       new: true,
     });
     if (!updated) {
       return res.status(404).send();
     }
-    res.status(200).send();
+    res.status(200).send(updated);
   } catch (error) {
     res.status(500).send(error.message);
   }
