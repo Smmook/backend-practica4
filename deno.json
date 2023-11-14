@@ -3,7 +3,7 @@
     "dev": "deno run --watch --allow-all main.ts"
   },
   "imports": {
-    "express": "npm:express@4.18.2",
+    "express": "npm:express",
     "mongoose": "npm:mongoose",
     "dotenv": "https://deno.land/std@0.204.0/dotenv/mod.ts"
   }
